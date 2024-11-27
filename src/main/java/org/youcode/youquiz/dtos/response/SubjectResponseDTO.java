@@ -9,9 +9,9 @@ import java.util.List;
 public record SubjectResponseDTO(
         Long id,
         String title,
-        EmbeddableSubjectResponseDTO parentSubject,
-        List<EmbeddableSubjectResponseDTO> subSubject,
-        List<Question> questions,
-        List<QuizSubject> quizSubjects
+        EmbeddableSubjectResponseDTO parentSubject
+//        List<EmbeddableSubjectResponseDTO> subSubject,
+//        List<Question> questions,
+//        List<QuizSubject> quizSubjects
 ) {
 }

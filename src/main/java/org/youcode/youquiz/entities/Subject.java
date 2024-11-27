@@ -28,7 +28,7 @@ public class Subject {
     @ManyToOne
     private Subject parentSubject;
 
-    @OneToMany
+    @OneToMany(mappedBy = "parentSubject")
     private List<Subject> subSubject;
 
     @OneToMany(mappedBy = "subject")

@@ -7,6 +7,6 @@ public record SubjectRequestDTO(
         @NotBlank
         String title,
 
-        Long parentSubject
+        Long parentSubjectId
 ) {
 }
