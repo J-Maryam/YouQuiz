@@ -1,0 +1,15 @@
+package org.youcode.youquiz.dtos.subject;
+
+import org.youcode.youquiz.dtos.question.EmbeddableQuestionDTO;
+
+import java.util.List;
+
+public record SubjectResponseDTO(
+        Long id,
+        String title,
+        EmbeddableSubjectDTO parentSubject,
+        List<EmbeddableSubjectDTO> subSubject,
+        List<EmbeddableQuestionDTO> questions
+//        List<QuizSubject> quizSubjects
+) {
+}

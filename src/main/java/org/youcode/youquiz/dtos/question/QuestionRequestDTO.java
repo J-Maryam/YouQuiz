@@ -1,4 +1,4 @@
-package org.youcode.youquiz.dtos.request;
+package org.youcode.youquiz.dtos.question;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
