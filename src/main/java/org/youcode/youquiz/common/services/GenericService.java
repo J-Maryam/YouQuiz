@@ -1,4 +1,4 @@
-package org.youcode.citronix.common.services;
+package org.youcode.youquiz.common.services;
 
 import org.springframework.data.domain.Pageable;
 import org.youcode.citronix.common.PagedResponse;

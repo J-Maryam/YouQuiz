@@ -1,4 +1,4 @@
-package org.youcode.citronix.common.services;
+package org.youcode.youquiz.common.services;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
