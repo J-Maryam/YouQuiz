@@ -8,7 +8,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.youcode.youquiz.embbedableId.QuizAssignmentId;
+import org.youcode.youquiz.entities.embbedableId.QuizAssignmentId;
 
 import java.time.LocalDate;
 

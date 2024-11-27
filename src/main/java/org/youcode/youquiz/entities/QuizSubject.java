@@ -5,7 +5,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.youcode.youquiz.embbedableId.QuizSubjectId;
+import org.youcode.youquiz.entities.embbedableId.QuizSubjectId;
 
 @Entity
 @Getter

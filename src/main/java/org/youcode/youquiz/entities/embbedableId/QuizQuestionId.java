@@ -1,4 +1,4 @@
-package org.youcode.youquiz.embbedableId;
+package org.youcode.youquiz.entities.embbedableId;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Embeddable;
