@@ -1,4 +1,4 @@
-package org.youcode.citronix.common;
+package org.youcode.youquiz.common;
 
 import java.util.List;
 
