@@ -1,4 +1,4 @@
-package org.youcode.citronix.common;
+package org.youcode.youquiz.common;
 
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.dao.DataIntegrityViolationException;
@@ -7,10 +7,10 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
-import org.youcode.citronix.common.exceptions.BadRequestException;
-import org.youcode.citronix.common.exceptions.ConflictException;
-import org.youcode.citronix.common.exceptions.EntityCreationException;
-import org.youcode.citronix.common.exceptions.EntityNotFoundException;
+import org.youcode.youquiz.common.exceptions.BadRequestException;
+import org.youcode.youquiz.common.exceptions.ConflictException;
+import org.youcode.youquiz.common.exceptions.EntityCreationException;
+import org.youcode.youquiz.common.exceptions.EntityNotFoundException;
 
 import java.time.LocalDateTime;
 
