@@ -38,6 +38,7 @@ public class Question {
 
     @ManyToOne
     @JoinColumn(name = "subject_id", nullable = false)
+    @NotNull
     private Subject subject;
 
     @ManyToOne
