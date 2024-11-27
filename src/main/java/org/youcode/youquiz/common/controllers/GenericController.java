@@ -1,4 +1,4 @@
-package org.youcode.citronix.common.controllers;
+package org.youcode.youquiz.common.controllers;
 
 import jakarta.validation.Valid;
 import org.springframework.data.domain.Pageable;
