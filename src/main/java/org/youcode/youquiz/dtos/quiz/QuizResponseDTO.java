@@ -1,5 +1,7 @@
 package org.youcode.youquiz.dtos.quiz;
 
+import org.youcode.youquiz.dtos.trainer.EmbeddableTrainerDTO;
+import org.youcode.youquiz.dtos.trainer.TrainerResponseDTO;
 import org.youcode.youquiz.entities.Trainer;
 
 public record QuizResponseDTO(
@@ -10,6 +12,6 @@ public record QuizResponseDTO(
         boolean canSeeResult,
         Integer numberOfAttempts,
         String remark,
-        Trainer trainer
+        EmbeddableTrainerDTO trainer
 ) {
 }

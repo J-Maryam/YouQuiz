@@ -1,4 +1,10 @@
 package org.youcode.youquiz.dtos.quizSubject;
 
-public record QuizSubjectResponseDTO() {
+import org.youcode.youquiz.dtos.quiz.EmbeddableQuizDTO;
+import org.youcode.youquiz.dtos.subject.EmbeddableSubjectDTO;
+
+public record QuizSubjectResponseDTO(
+        EmbeddableQuizDTO quiz,
+        EmbeddableSubjectDTO subject
+) {
 }

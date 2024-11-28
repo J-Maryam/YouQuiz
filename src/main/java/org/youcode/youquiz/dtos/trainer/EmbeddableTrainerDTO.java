@@ -1,4 +1,9 @@
 package org.youcode.youquiz.dtos.trainer;
 
-public record EmbeddableTrainerDTO() {
+import org.youcode.youquiz.dtos.user.UserResponseDTO;
+
+public record EmbeddableTrainerDTO(
+        UserResponseDTO user,
+        String specialty
+) {
 }

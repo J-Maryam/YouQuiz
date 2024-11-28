@@ -1,6 +1,7 @@
 package org.youcode.youquiz.dtos.subject;
 
 import org.youcode.youquiz.dtos.question.EmbeddableQuestionDTO;
+import org.youcode.youquiz.dtos.quizSubject.EmbeddableQuizSubjectDTO;
 
 import java.util.List;
 
@@ -9,7 +10,7 @@ public record SubjectResponseDTO(
         String title,
         EmbeddableSubjectDTO parentSubject,
         List<EmbeddableSubjectDTO> subSubject,
-        List<EmbeddableQuestionDTO> questions
-//        List<QuizSubject> quizSubjects
+        List<EmbeddableQuestionDTO> questions,
+        List<EmbeddableQuizSubjectDTO> quizSubjects
 ) {
 }

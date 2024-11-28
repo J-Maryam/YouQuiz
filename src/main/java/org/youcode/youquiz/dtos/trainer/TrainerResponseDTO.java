@@ -1,4 +1,13 @@
 package org.youcode.youquiz.dtos.trainer;
 
-public record TrainerResponseDTO() {
+import org.youcode.youquiz.dtos.quiz.EmbeddableQuizDTO;
+import org.youcode.youquiz.dtos.user.UserResponseDTO;
+
+import java.util.List;
+
+public record TrainerResponseDTO(
+        UserResponseDTO user,
+        String specialty,
+        List<EmbeddableQuizDTO> quizzes
+) {
 }

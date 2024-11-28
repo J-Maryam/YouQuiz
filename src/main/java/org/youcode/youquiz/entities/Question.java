@@ -42,7 +42,8 @@ public class Question {
     private Subject subject;
 
     @ManyToOne
-    @JoinColumn(name = "level_id", nullable = false)
+//    , nullable = false
+    @JoinColumn(name = "level_id")
     private Level level;
 
     @OneToMany(mappedBy = "question")

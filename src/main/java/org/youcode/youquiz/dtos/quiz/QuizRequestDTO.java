@@ -9,6 +9,6 @@ public record QuizRequestDTO(
         boolean canSeeResult,
         Integer numberOfAttempts,
         String remark,
-        Trainer trainer
+        Long trainerId
 ) {
 }

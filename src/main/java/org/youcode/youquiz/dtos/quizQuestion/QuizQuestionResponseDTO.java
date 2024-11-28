@@ -1,4 +1,11 @@
 package org.youcode.youquiz.dtos.quizQuestion;
 
-public record QuizQuestionResponseDTO() {
+import org.youcode.youquiz.dtos.question.EmbeddableQuestionDTO;
+import org.youcode.youquiz.dtos.quiz.EmbeddableQuizDTO;
+
+public record QuizQuestionResponseDTO(
+        int duration,
+        EmbeddableQuizDTO quiz,
+        EmbeddableQuestionDTO question
+) {
 }

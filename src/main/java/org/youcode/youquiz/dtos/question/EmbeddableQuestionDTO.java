@@ -1,6 +1,7 @@
 package org.youcode.youquiz.dtos.question;
 
-import org.youcode.youquiz.dtos.subject.SubjectResponseDTO;
+import org.youcode.youquiz.dtos.level.EmbeddableLevelDTO;
+import org.youcode.youquiz.dtos.subject.EmbeddableSubjectDTO;
 import org.youcode.youquiz.entities.enums.QuestionType;
 
 public record EmbeddableQuestionDTO(
@@ -9,7 +10,7 @@ public record EmbeddableQuestionDTO(
         int numberOfCorrectAnswers,
         String text,
         QuestionType questionType,
-        SubjectResponseDTO subject
-//        Level level
+        EmbeddableSubjectDTO subject,
+        EmbeddableLevelDTO level
 ) {
 }

@@ -3,8 +3,6 @@ package org.youcode.youquiz.dtos.question;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
-import org.youcode.youquiz.entities.Level;
-import org.youcode.youquiz.entities.Subject;
 import org.youcode.youquiz.entities.enums.QuestionType;
 
 public record QuestionRequestDTO(
@@ -23,8 +21,8 @@ public record QuestionRequestDTO(
         QuestionType questionType,
 
         @NotNull
-        Subject subject,
+        Long subjectId,
 
-        Level level
+        Long levelId
 ) {
 }

@@ -1,4 +1,11 @@
 package org.youcode.youquiz.dtos.student;
 
-public record StudentRequestDTO() {
+import org.youcode.youquiz.dtos.user.UserRequestDTO;
+
+import java.time.LocalDate;
+
+public record StudentRequestDTO(
+        UserRequestDTO user,
+        LocalDate registrationDate
+) {
 }

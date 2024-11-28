@@ -1,4 +1,9 @@
 package org.youcode.youquiz.dtos.trainer;
 
-public record TrainerRequestDTO() {
+import org.youcode.youquiz.dtos.user.UserRequestDTO;
+
+public record TrainerRequestDTO(
+        UserRequestDTO user,
+        String specialty
+) {
 }
