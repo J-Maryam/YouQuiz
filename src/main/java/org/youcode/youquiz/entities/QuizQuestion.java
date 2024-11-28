@@ -17,7 +17,7 @@ public class QuizQuestion {
     @EmbeddedId
     private QuizQuestionId id;
 
-    private int duration;
+    private int timer;
 
     @ManyToOne
     @MapsId("quizId")

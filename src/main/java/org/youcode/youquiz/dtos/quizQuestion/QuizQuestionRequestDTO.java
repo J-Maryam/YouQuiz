@@ -1,7 +1,7 @@
 package org.youcode.youquiz.dtos.quizQuestion;
 
 public record QuizQuestionRequestDTO(
-        int duration,
+        int timer,
         Long quizId,
         Long questionId
 ) {

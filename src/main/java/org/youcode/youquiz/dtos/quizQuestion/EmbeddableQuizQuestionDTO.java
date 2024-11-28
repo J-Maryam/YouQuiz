@@ -10,7 +10,7 @@ import org.youcode.youquiz.entities.Trainer;
 import java.util.List;
 
 public record EmbeddableQuizQuestionDTO(
-        int duration,
+        int timer,
         EmbeddableQuizDTO quiz,
         EmbeddableQuestionDTO question
 ) {
