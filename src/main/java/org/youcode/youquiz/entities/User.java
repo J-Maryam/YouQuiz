@@ -14,11 +14,11 @@ import java.time.LocalDate;
 @Entity
 @Getter
 @Setter
+@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
+@DiscriminatorColumn(name = "user_type", discriminatorType = DiscriminatorType.STRING)
 @NoArgsConstructor
 @AllArgsConstructor
-@Inheritance(strategy = InheritanceType.JOINED)
-//@MappedSuperclass
-@Table(name = "user")
+@Table(name = "users")
 public abstract class User {
 
     @Id

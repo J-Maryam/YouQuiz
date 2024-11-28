@@ -7,7 +7,6 @@ import java.util.List;
 
 public record TrainerResponseDTO(
         UserResponseDTO user,
-        String specialty,
         List<EmbeddableQuizDTO> quizzes
 ) {
 }
