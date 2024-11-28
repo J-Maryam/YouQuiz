@@ -10,6 +10,7 @@ import org.youcode.youquiz.dtos.quizQuestion.QuizQuestionResponseDTO;
 import org.youcode.youquiz.entities.Question;
 import org.youcode.youquiz.entities.Quiz;
 import org.youcode.youquiz.entities.QuizQuestion;
+import org.youcode.youquiz.entities.embbedableId.QuizQuestionId;
 import org.youcode.youquiz.mappers.QuizQuestionMapper;
 import org.youcode.youquiz.repositories.QuestionRepository;
 import org.youcode.youquiz.repositories.QuizQuestionRepository;
@@ -36,7 +37,9 @@ public class QuizQuestionServiceImpl extends GenericServiceImpl<QuizQuestion, Lo
         Question existingQuestion = questionRepository.findById(requestDto.questionId())
                 .orElseThrow(() -> new EntityNotFoundException("Question with Id: " + requestDto.questionId() + " not found"));
 
+        QuizQuestionId quizQuestionId = new QuizQuestionId(existingQuiz.getId(), existingQuestion.getId());
         QuizQuestion quizQuestion = mapper.toEntity(requestDto);
+        quizQuestion.setId(quizQuestionId);
         quizQuestion.setQuestion(existingQuestion);
         quizQuestion.setQuiz(existingQuiz);
         QuizQuestion saved = repository.save(quizQuestion);
