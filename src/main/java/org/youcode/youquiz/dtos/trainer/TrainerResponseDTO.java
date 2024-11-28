@@ -6,6 +6,7 @@ import java.time.LocalDate;
 import java.util.List;
 
 public record TrainerResponseDTO(
+        Long id,
         String firstName,
         String lastName,
         String address,
