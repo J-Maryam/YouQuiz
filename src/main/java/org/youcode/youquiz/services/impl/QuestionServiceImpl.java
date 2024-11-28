@@ -37,10 +37,25 @@ public class QuestionServiceImpl extends GenericServiceImpl<Question, Long, Ques
         Level existingLevel = levelRepository.findById(requestDto.levelId())
                 .orElseThrow(() -> new EntityNotFoundException("Level with Id " + requestDto.levelId() + " does not exist"));
 
+        validateQuestionAnswers(requestDto.numberOfAnswers(), requestDto.numberOfCorrectAnswers());
+
         Question question = mapper.toEntity(requestDto);
         question.setSubject(existingSubject);
         question.setLevel(existingLevel);
         Question saved = repository.save(question);
         return mapper.toDto(saved);
     }
+
+    private void validateQuestionAnswers(int numberOfAnswers, int numberOfCorrectAnswers) {
+        if (numberOfAnswers <= 0) {
+            throw new IllegalArgumentException("The number of answers must be greater than 0");
+        }
+
+        if (numberOfCorrectAnswers < 1 || numberOfCorrectAnswers > numberOfAnswers) {
+            throw new IllegalArgumentException(
+                    "The number of correct answers must be between 1 and the total number of answers (" + numberOfAnswers + ")"
+            );
+        }
+    }
+
 }
