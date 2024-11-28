@@ -1,12 +1,15 @@
 package org.youcode.youquiz.dtos.trainer;
 
 import org.youcode.youquiz.dtos.quiz.EmbeddableQuizDTO;
-import org.youcode.youquiz.dtos.user.UserResponseDTO;
 
+import java.time.LocalDate;
 import java.util.List;
 
 public record TrainerResponseDTO(
-        UserResponseDTO user,
+        String firstName,
+        String lastName,
+        String address,
+        LocalDate birthDate,
         List<EmbeddableQuizDTO> quizzes
 ) {
 }

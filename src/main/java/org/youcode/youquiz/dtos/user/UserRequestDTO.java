@@ -8,9 +8,9 @@ import java.time.LocalDate;
 
 public record UserRequestDTO(
         @NotBlank
-        String firstname,
+        String firstName,
         @NotBlank
-        String lastname,
+        String lastName,
         @NotBlank
         String address,
         @NotNull
