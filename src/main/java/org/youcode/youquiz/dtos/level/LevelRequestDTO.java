@@ -7,12 +7,14 @@ import org.youcode.youquiz.entities.Level;
 
 public record LevelRequestDTO(
 
-        @NotBlank
-        @UniqueValue(entityClass = Level.class, fieldName = "description", message = "Level must be unique")
+        @NotBlank(message = "Description cannot be blank")
+        @UniqueValue(entityClass = Level.class, fieldName = "description", message = "Level description must be unique")
         String description,
-        @NotNull
+
+        @NotNull(message = "Minimum points cannot be null")
         Integer minPoints,
-        @NotNull
+
+        @NotNull(message = "Maximum points cannot be null")
         Integer maxPoints
 ) {
 }
