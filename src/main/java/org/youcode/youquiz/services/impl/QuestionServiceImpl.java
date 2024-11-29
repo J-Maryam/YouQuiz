@@ -40,12 +40,7 @@ public class QuestionServiceImpl extends GenericServiceImpl<Question, Long, Ques
         Level existingLevel = levelRepository.findById(requestDto.levelId())
                 .orElseThrow(() -> new EntityNotFoundException("Level with Id " + requestDto.levelId() + " does not exist"));
 
-        boolean questionExists = questionRepository.existsByTextAndSubjectId(requestDto.text(), existingSubject.getId());
-
-        if (questionExists) {
-            throw new EntityExistsException("Question with this same text " + requestDto.text() + " already exists");
-        }
-        validateQuestionAnswers(requestDto.numberOfAnswers(), requestDto.numberOfCorrectAnswers());
+        validateQuestionAnswers(requestDto.numberOfAnswers(), requestDto.numberOfCorrectAnswers(), requestDto.text(), requestDto.subjectId());
 
         Question question = mapper.toEntity(requestDto);
         question.setSubject(existingSubject);
@@ -54,7 +49,7 @@ public class QuestionServiceImpl extends GenericServiceImpl<Question, Long, Ques
         return mapper.toDto(saved);
     }
 
-    private void validateQuestionAnswers(int numberOfAnswers, int numberOfCorrectAnswers) {
+    private void validateQuestionAnswers(int numberOfAnswers, int numberOfCorrectAnswers, String text, Long subjectId) {
         if (numberOfAnswers <= 0) {
             throw new IllegalArgumentException("The number of answers must be greater than 0");
         }
@@ -63,6 +58,12 @@ public class QuestionServiceImpl extends GenericServiceImpl<Question, Long, Ques
             throw new IllegalArgumentException(
                     "The number of correct answers must be between 1 and the total number of answers (" + numberOfAnswers + ")"
             );
+        }
+
+        boolean questionExists = questionRepository.existsByTextAndSubjectId(text, subjectId);
+
+        if (questionExists) {
+            throw new EntityExistsException("Question with this same text " + text + " already exists");
         }
     }
 
