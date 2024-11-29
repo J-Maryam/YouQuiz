@@ -1,7 +1,7 @@
 package org.youcode.youquiz.dtos.answerValidation;
 
 public record AnswerValidationRequestDTO(
-        double point,
+        double points,
         Long questionId,
         Long answerId
 ) {

@@ -19,7 +19,7 @@ public class AnswerValidation {
     private AnswerValidationId id;
 
     @NotNull
-    private double point;
+    private double points;
 
     @ManyToOne
     @MapsId("questionId")

@@ -4,7 +4,7 @@ import org.youcode.youquiz.dtos.answer.EmbeddableAnswerDTO;
 import org.youcode.youquiz.dtos.question.EmbeddableQuestionDTO;
 
 public record AnswerValidationResponseDTO(
-        double point,
+        double points,
         EmbeddableQuestionDTO question,
         EmbeddableAnswerDTO answer
 ) {

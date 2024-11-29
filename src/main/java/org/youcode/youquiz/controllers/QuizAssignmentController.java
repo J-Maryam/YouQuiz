@@ -21,7 +21,7 @@ public class QuizAssignmentController extends GenericControllerImpl<QuizAssignme
         super(service);
     }
 
-    @PostMapping("/quizzes/{quiz_id}")
+    @Override
     public ResponseEntity<ApiResponse<QuizAssignmentResponseDTO>> create(@RequestBody @Valid QuizAssignmentRequestDTO request) {
         QuizAssignmentResponseDTO responseDTO = service.create(request);
         return ResponseEntity.ok(ApiResponse.success(responseDTO, "Item created successfully"));

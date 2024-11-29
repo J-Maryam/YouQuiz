@@ -27,4 +27,6 @@ public class AnswerValidationServiceImpl extends GenericServiceImpl<AnswerValida
         this.questionRepository = questionRepository;
         this.answerRepository = answerRepository;
     }
+
+
 }
