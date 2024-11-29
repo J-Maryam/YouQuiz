@@ -1,7 +1,7 @@
 package org.youcode.youquiz.dtos.questionHasAnswers;
 
 public record QuestionHasAnswersRequestDTO(
-        boolean isTrue,
+        boolean correct,
         Long questionId,
         Long answerId
 ) {

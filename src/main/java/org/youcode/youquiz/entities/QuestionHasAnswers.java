@@ -18,7 +18,7 @@ public class QuestionHasAnswers {
     private QuestionHasAnswersId id;
 
     @NotNull
-    private boolean isTrue;
+    private boolean correct;
 
     @ManyToOne
     @MapsId("questionId")
