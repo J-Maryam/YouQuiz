@@ -12,25 +12,25 @@ import org.youcode.youquiz.entities.enums.QuestionType;
 
 public record QuestionRequestDTO(
 
-        @NotNull
+        @NotNull(message = "Number of answers cannot be null")
         int numberOfAnswers,
 
-        @NotNull
+        @NotNull(message = "Number of correct answers cannot be null")
         int numberOfCorrectAnswers,
 
-        @NotBlank
+        @NotBlank(message = "Question text cannot be blank")
         @UniqueValue(entityClass = Question.class, fieldName = "text", message = "Question must be unique")
         String text,
 
-        @NotNull
+        @NotNull(message = "Question type cannot be null")
         @Enumerated(EnumType.STRING)
         QuestionType questionType,
 
-        @NotNull
+        @NotNull(message = "Subject ID cannot be null")
         @Exists(entityClass = Subject.class, message = "Subject id does not exist")
         Long subjectId,
 
-        @NotNull
+        @NotNull(message = "Level ID cannot be null")
         @Exists(entityClass = Level.class, message = "Level id does not exist")
         Long levelId
 ) {
