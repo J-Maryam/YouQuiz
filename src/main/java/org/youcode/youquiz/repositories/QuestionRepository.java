@@ -6,4 +6,5 @@ import org.youcode.youquiz.entities.Question;
 
 @Repository
 public interface QuestionRepository extends JpaRepository<Question, Long> {
+    boolean existsByTextAndSubjectId(String text, Long subjectId);
 }

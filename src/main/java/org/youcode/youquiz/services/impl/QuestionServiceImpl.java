@@ -1,5 +1,6 @@
 package org.youcode.youquiz.services.impl;
 
+import jakarta.persistence.EntityExistsException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.validation.annotation.Validated;
@@ -23,10 +24,12 @@ public class QuestionServiceImpl extends GenericServiceImpl<Question, Long, Ques
 
     private final SubjectRepository subjectRepository;
     private final LevelRepository levelRepository;
-    public QuestionServiceImpl(QuestionRepository repository, QuestionMapper mapper, SubjectRepository subjectRepository, LevelRepository levelRepository) {
+    private final QuestionRepository questionRepository;
+    public QuestionServiceImpl(QuestionRepository repository, QuestionMapper mapper, SubjectRepository subjectRepository, LevelRepository levelRepository, QuestionRepository questionRepository) {
         super(repository, mapper);
         this.subjectRepository = subjectRepository;
         this.levelRepository = levelRepository;
+        this.questionRepository = questionRepository;
     }
 
     @Override
@@ -37,6 +40,11 @@ public class QuestionServiceImpl extends GenericServiceImpl<Question, Long, Ques
         Level existingLevel = levelRepository.findById(requestDto.levelId())
                 .orElseThrow(() -> new EntityNotFoundException("Level with Id " + requestDto.levelId() + " does not exist"));
 
+        boolean questionExists = questionRepository.existsByTextAndSubjectId(requestDto.text(), existingSubject.getId());
+
+        if (questionExists) {
+            throw new EntityExistsException("Question with this same text " + requestDto.text() + " already exists");
+        }
         validateQuestionAnswers(requestDto.numberOfAnswers(), requestDto.numberOfCorrectAnswers());
 
         Question question = mapper.toEntity(requestDto);
