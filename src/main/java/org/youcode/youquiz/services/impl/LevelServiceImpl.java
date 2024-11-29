@@ -14,4 +14,22 @@ public class LevelServiceImpl extends GenericServiceImpl<Level, Long, LevelReque
     public LevelServiceImpl(LevelRepository repository, LevelMapper mapper) {
         super(repository, mapper);
     }
+
+    @Override
+    public LevelResponseDTO create(LevelRequestDTO requestDTO) {
+        validateLevelPoints(requestDTO.minPoints(), requestDTO.maxPoints());
+        Level level = mapper.toEntity(requestDTO);
+        Level saved = repository.save(level);
+        return mapper.toDto(saved);
+    }
+
+    private void validateLevelPoints(Integer minPoints, Integer maxPoints) {
+        if (minPoints < 0) {
+            throw new IllegalArgumentException("Minimum points cannot be negative");
+        }
+        if (maxPoints <= minPoints) {
+            throw new IllegalArgumentException("Maximum points must be greater than minimum points");
+        }
+    }
+
 }

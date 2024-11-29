@@ -19,7 +19,7 @@ public record QuestionRequestDTO(
         int numberOfCorrectAnswers,
 
         @NotBlank
-        @UniqueValue(entityClass = Question.class, fieldName = "text")
+        @UniqueValue(entityClass = Question.class, fieldName = "text", message = "Question must be unique")
         String text,
 
         @NotNull
