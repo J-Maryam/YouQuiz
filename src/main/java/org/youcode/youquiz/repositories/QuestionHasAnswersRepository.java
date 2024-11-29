@@ -7,4 +7,6 @@ import org.youcode.youquiz.entities.embbedableId.QuestionHasAnswersId;
 
 @Repository
 public interface QuestionHasAnswersRepository extends JpaRepository<QuestionHasAnswers, QuestionHasAnswersId> {
+    Long countByQuestionId(Long questionId);
+    Long countByQuestionIdAndCorrect(Long questionId, boolean isTrue);
 }
