@@ -8,7 +8,7 @@ public record QuizAssignmentRequestDTO(
         LocalDate endDate,
         int attempt,
         double score,
-        double result,
+        String result,
         Long quizId,
         Long studentId
 ) {

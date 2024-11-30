@@ -20,6 +20,9 @@ public class QuestionHasAnswers {
     @NotNull
     private boolean correct;
 
+    @NotNull
+    private double note;
+
     @ManyToOne
     @MapsId("questionId")
     @JoinColumn(name = "question_id")

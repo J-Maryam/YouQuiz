@@ -11,7 +11,7 @@ public record EmbeddableQuizAssignmentDTO(
         LocalDate endDate,
         int attempt,
         double score,
-        double result,
+        String result,
         EmbeddableQuizDTO quiz,
         EmbeddableStudentDTO student
 ) {

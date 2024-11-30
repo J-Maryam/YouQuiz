@@ -37,8 +37,8 @@ public class QuizAssignment {
     @NotNull
     private double score;
 
-    @NotNull
-    private double result;
+    @NotBlank
+    private String result;
 
     @ManyToOne
     @MapsId("quizId")
