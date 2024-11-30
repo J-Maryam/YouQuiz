@@ -5,6 +5,7 @@ import org.youcode.youquiz.dtos.question.EmbeddableQuestionDTO;
 
 public record QuestionHasAnswersResponseDTO(
         boolean correct,
+        double note,
         EmbeddableQuestionDTO question,
         EmbeddableAnswerDTO answer
 ) {
