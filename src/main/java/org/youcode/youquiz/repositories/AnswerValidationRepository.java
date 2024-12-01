@@ -5,6 +5,9 @@ import org.springframework.stereotype.Repository;
 import org.youcode.youquiz.entities.AnswerValidation;
 import org.youcode.youquiz.entities.embbedableId.AnswerValidationId;
 
+import java.util.List;
+
 @Repository
 public interface AnswerValidationRepository extends JpaRepository<AnswerValidation, AnswerValidationId> {
+    List<AnswerValidation> findByQuizIdAndStudentId(long quizId, long studentId);
 }

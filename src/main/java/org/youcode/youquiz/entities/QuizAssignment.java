@@ -50,8 +50,8 @@ public class QuizAssignment {
     @MapsId("studentId")
     @JoinColumn(name = "student_id")
     private Student student;
-//
-//    @OneToMany(mappedBy = "quizAssignment")
-//    private List<AnswerValidation> answerValidations;
+
+    @OneToMany(mappedBy = "quizAssignment")
+    private List<AnswerValidation> answerValidations;
 
 }

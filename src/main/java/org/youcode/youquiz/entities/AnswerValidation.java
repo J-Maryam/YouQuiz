@@ -31,28 +31,20 @@ public class AnswerValidation {
     @JoinColumn(name = "answer_id")
     private Answer answer;
 
-//    @ManyToOne
-//    @MapsId("quizId")  // Lier à QuizAssignment via quizId
-//    private QuizAssignment quizAssignment;
-//
-//    @ManyToOne
-//    @MapsId("studentId")  // Lier à QuizAssignment via studentId
-//    private Student student;
-
-//    @ManyToOne
-//    @JoinColumns({
-//            @JoinColumn(name = "quiz_id", referencedColumnName = "quiz_id"),
-//            @JoinColumn(name = "student_id", referencedColumnName = "student_id")
-//    })
-//    private QuizAssignment quizAssignment;
-
     @ManyToOne
     @MapsId("quizId")
     @JoinColumn(name = "quiz_id")
-    private Quiz quiz;  // Changez de QuizAssignment à Quiz
+    private Quiz quiz;
 
     @ManyToOne
     @MapsId("studentId")
     @JoinColumn(name = "student_id")
     private Student student;
+
+    @ManyToOne
+    @JoinColumns({
+            @JoinColumn(name = "quiz_id", referencedColumnName = "quiz_id", insertable = false, updatable = false),
+            @JoinColumn(name = "student_id", referencedColumnName = "student_id", insertable = false, updatable = false)
+    })
+    private QuizAssignment quizAssignment;
 }
