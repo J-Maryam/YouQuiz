@@ -11,6 +11,7 @@ import lombok.Setter;
 import org.youcode.youquiz.entities.embbedableId.QuizAssignmentId;
 
 import java.time.LocalDate;
+import java.util.List;
 
 @Entity
 @Getter
@@ -49,4 +50,8 @@ public class QuizAssignment {
     @MapsId("studentId")
     @JoinColumn(name = "student_id")
     private Student student;
+//
+//    @OneToMany(mappedBy = "quizAssignment")
+//    private List<AnswerValidation> answerValidations;
+
 }
