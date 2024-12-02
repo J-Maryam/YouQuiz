@@ -14,7 +14,6 @@ import org.youcode.youquiz.entities.Trainer;
 import org.youcode.youquiz.mappers.QuizMapper;
 import org.youcode.youquiz.repositories.QuizRepository;
 import org.youcode.youquiz.repositories.TrainerRepository;
-import org.youcode.youquiz.services.QuizService;
 
 import java.util.Optional;
 
@@ -116,10 +115,8 @@ class QuizServiceImplTest {
 
     @Test
     void testGetQuizById_NotFound() {
-        // Arrange
         when(quizRepository.findById(1L)).thenReturn(Optional.empty());
 
-        // Act & Assert
         assertThrows(EntityNotFoundException.class,
                 () -> quizService.getById(1L),
                 "Entity with Id 1 not found"
@@ -128,16 +125,13 @@ class QuizServiceImplTest {
 
     @Test
     void testUpdateQuiz_Success() {
-        // Arrange
         when(quizRepository.existsById(1L)).thenReturn(true);
         when(quizMapper.toEntity(quizRequestDTO)).thenReturn(quiz);
         when(quizRepository.save(quiz)).thenReturn(quiz);
         when(quizMapper.toDto(quiz)).thenReturn(quizResponseDTO);
 
-        // Act
         QuizResponseDTO result = quizService.update(1L, quizRequestDTO);
 
-        // Assert
         assertNotNull(result);
         assertEquals(quizResponseDTO.id(), result.id());
         verify(quizRepository).existsById(1L);
@@ -146,10 +140,8 @@ class QuizServiceImplTest {
 
     @Test
     void testUpdateQuiz_NotFound() {
-        // Arrange
         when(quizRepository.existsById(1L)).thenReturn(false);
 
-        // Act & Assert
         assertThrows(EntityNotFoundException.class,
                 () -> quizService.update(1L, quizRequestDTO),
                 "Entity with Id 1 not found"
@@ -158,23 +150,18 @@ class QuizServiceImplTest {
 
     @Test
     void testDeleteQuiz_Success() {
-        // Arrange
         when(quizRepository.findById(1L)).thenReturn(Optional.of(quiz));
 
-        // Act
         quizService.delete(1L);
 
-        // Assert
         verify(quizRepository).findById(1L);
         verify(quizRepository).delete(quiz);
     }
 
     @Test
     void testDeleteQuiz_NotFound() {
-        // Arrange
         when(quizRepository.findById(1L)).thenReturn(Optional.empty());
 
-        // Act & Assert
         assertThrows(EntityNotFoundException.class,
                 () -> quizService.delete(1L),
                 "Entity with Id 1 not found"
