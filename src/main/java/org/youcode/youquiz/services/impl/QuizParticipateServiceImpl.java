@@ -136,6 +136,7 @@ public class QuizParticipateServiceImpl implements QuizParticipateService {
         quizAssignment.setScore(totalScore);
         ResultType result = totalScore >= quiz.getSuccessScore() ? ResultType.SUCCESS : ResultType.FAILURE;
         quizAssignment.setResult(result.toString());
+        quizAssignment.setAttempt(quizAssignment.getAttempt() + 1);
         quizAssignmentRepository.save(quizAssignment);
     }
 

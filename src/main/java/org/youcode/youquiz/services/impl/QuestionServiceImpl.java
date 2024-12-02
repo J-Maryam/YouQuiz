@@ -4,6 +4,7 @@ import jakarta.persistence.EntityExistsException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.validation.annotation.Validated;
+import org.youcode.youquiz.common.exceptions.EntityCreationException;
 import org.youcode.youquiz.common.exceptions.EntityNotFoundException;
 import org.youcode.youquiz.common.services.GenericServiceImpl;
 import org.youcode.youquiz.dtos.question.QuestionRequestDTO;
@@ -25,6 +26,7 @@ public class QuestionServiceImpl extends GenericServiceImpl<Question, Long, Ques
     private final SubjectRepository subjectRepository;
     private final LevelRepository levelRepository;
     private final QuestionRepository questionRepository;
+
     public QuestionServiceImpl(QuestionRepository repository, QuestionMapper mapper, SubjectRepository subjectRepository, LevelRepository levelRepository, QuestionRepository questionRepository) {
         super(repository, mapper);
         this.subjectRepository = subjectRepository;
@@ -36,6 +38,10 @@ public class QuestionServiceImpl extends GenericServiceImpl<Question, Long, Ques
     public QuestionResponseDTO create(QuestionRequestDTO requestDto) {
         Subject existingSubject = subjectRepository.findById(requestDto.subjectId())
                 .orElseThrow(() -> new EntityNotFoundException("Subject with Id " + requestDto.subjectId() + " does not exist"));
+
+        if (!existingSubject.getSubSubjects().isEmpty()) {
+            throw new EntityCreationException("Cannot create question in a parent subject, try to create question in subSubject");
+        }
 
         Level existingLevel = levelRepository.findById(requestDto.levelId())
                 .orElseThrow(() -> new EntityNotFoundException("Level with Id " + requestDto.levelId() + " does not exist"));
