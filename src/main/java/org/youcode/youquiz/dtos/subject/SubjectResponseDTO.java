@@ -9,7 +9,7 @@ public record SubjectResponseDTO(
         Long id,
         String title,
         EmbeddableSubjectDTO parentSubject,
-        List<EmbeddableSubjectDTO> subSubject,
+        List<EmbeddableSubjectDTO> subSubjects,
         List<EmbeddableQuestionDTO> questions,
         List<EmbeddableQuizSubjectDTO> quizSubjects
 ) {

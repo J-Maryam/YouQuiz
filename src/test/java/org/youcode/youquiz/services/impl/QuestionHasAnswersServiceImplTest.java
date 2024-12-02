@@ -120,7 +120,7 @@ class QuestionHasAnswersServiceImplTest {
         when(answerRepository.findById(requestDTO.answerId()))
                 .thenReturn(Optional.of(answer));
         when(hasAnswersRepository.countByQuestionId(question.getId()))
-                .thenReturn(2L);  // Max answers reached
+                .thenReturn(2L);
 
         assertThrows(IllegalArgumentException.class,
                 () -> questionHasAnswersService.create(requestDTO),
@@ -137,7 +137,7 @@ class QuestionHasAnswersServiceImplTest {
         when(hasAnswersRepository.countByQuestionId(question.getId()))
                 .thenReturn(0L);
         when(hasAnswersRepository.countByQuestionIdAndCorrect(question.getId(), true))
-                .thenReturn(1L);  // Already has a correct answer
+                .thenReturn(1L);
 
         assertThrows(IllegalArgumentException.class,
                 () -> questionHasAnswersService.create(requestDTO),

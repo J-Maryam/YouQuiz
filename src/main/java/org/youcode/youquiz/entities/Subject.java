@@ -25,15 +25,15 @@ public class Subject {
     @Column(unique = true)
     private String title;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
     private Subject parentSubject;
 
-    @OneToMany(mappedBy = "parentSubject")
-    private List<Subject> subSubject;
+    @OneToMany(mappedBy = "parentSubject", fetch = FetchType.EAGER)
+    private List<Subject> subSubjects = new ArrayList<>();
 
-    @OneToMany(mappedBy = "subject")
-    private List<Question> questions;
+    @OneToMany(mappedBy = "subject", fetch = FetchType.EAGER)
+    private List<Question> questions = new ArrayList<>();
 
-    @OneToMany(mappedBy = "subject")
+    @OneToMany(mappedBy = "subject", fetch = FetchType.EAGER)
     private List<QuizSubject> quizSubjects = new ArrayList<>();
 }
