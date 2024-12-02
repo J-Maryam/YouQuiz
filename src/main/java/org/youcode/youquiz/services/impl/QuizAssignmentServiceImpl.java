@@ -10,6 +10,7 @@ import org.youcode.youquiz.entities.Quiz;
 import org.youcode.youquiz.entities.QuizAssignment;
 import org.youcode.youquiz.entities.Student;
 import org.youcode.youquiz.entities.embbedableId.QuizAssignmentId;
+import org.youcode.youquiz.entities.enums.ResultType;
 import org.youcode.youquiz.mappers.QuizAssignmentMapper;
 import org.youcode.youquiz.repositories.QuizAssignmentRepository;
 import org.youcode.youquiz.repositories.QuizRepository;
@@ -42,6 +43,7 @@ public class QuizAssignmentServiceImpl extends GenericServiceImpl<QuizAssignment
         quizAssignment.setId(quizAssignmentId);
         quizAssignment.setQuiz(existingQuiz);
         quizAssignment.setStudent(existingStudent);
+        quizAssignment.setResult((ResultType.PENDING).toString());
 
         QuizAssignment saved = repository.save(quizAssignment);
         return mapper.toDto(saved);
