@@ -35,10 +35,6 @@ public class Quiz {
     @NotNull
     private boolean canSeeResult;
 
-    @NotNull
-    @Positive
-    private Integer numberOfAttempts;
-
     @NotBlank
     private String remark;
 

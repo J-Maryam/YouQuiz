@@ -44,6 +44,7 @@ public class QuizAssignmentServiceImpl extends GenericServiceImpl<QuizAssignment
         quizAssignment.setQuiz(existingQuiz);
         quizAssignment.setStudent(existingStudent);
         quizAssignment.setResult((ResultType.PENDING).toString());
+        quizAssignment.setAttempt(1);
 
         QuizAssignment saved = repository.save(quizAssignment);
         return mapper.toDto(saved);

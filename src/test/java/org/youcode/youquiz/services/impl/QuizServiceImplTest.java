@@ -55,7 +55,6 @@ class QuizServiceImplTest {
                 0,
                 false,
                 false,
-                1,
                 "first attempt",
                 1L
         );
@@ -66,7 +65,6 @@ class QuizServiceImplTest {
                 0,
                 false,
                 false,
-                1,
                 "first attempt",
                 null
         );

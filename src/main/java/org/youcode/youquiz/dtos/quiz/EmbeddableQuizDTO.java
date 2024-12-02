@@ -8,7 +8,6 @@ public record EmbeddableQuizDTO(
         double successScore,
         boolean canSeeAnswers,
         boolean canSeeResult,
-        Integer numberOfAttempts,
         String remark,
         EmbeddableTrainerDTO trainer
 ) {

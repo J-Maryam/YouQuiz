@@ -56,7 +56,6 @@ public class QuizParticipateServiceImpl implements QuizParticipateService {
         ParticipationResultDTO.QuizResultDTO quizResultDTO = new ParticipationResultDTO.QuizResultDTO(
                 quiz.getTitle(),
                 quiz.getSuccessScore(),
-                quiz.getNumberOfAttempts(),
                 quiz.getRemark(),
                 new ParticipationResultDTO.TrainerResultDTO(
                         quiz.getTrainer().getFirstName(),

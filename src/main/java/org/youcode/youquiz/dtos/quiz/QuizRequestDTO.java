@@ -14,11 +14,6 @@ public record QuizRequestDTO(
         boolean canSeeAnswers,
         @NotNull
         boolean canSeeResult,
-
-        @NotNull
-        @Positive
-        Integer numberOfAttempts,
-
         @NotBlank
         String remark,
         @NotNull

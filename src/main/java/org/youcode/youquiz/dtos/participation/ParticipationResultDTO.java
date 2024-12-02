@@ -24,7 +24,6 @@ public record ParticipationResultDTO(
     public record QuizResultDTO(
             String title,
             double successScore,
-            Integer numberOfAttempts,
             String remark,
             TrainerResultDTO trainer
     ) {
