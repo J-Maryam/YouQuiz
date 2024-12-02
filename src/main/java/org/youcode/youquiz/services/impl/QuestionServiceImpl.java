@@ -12,6 +12,7 @@ import org.youcode.youquiz.dtos.question.QuestionResponseDTO;
 import org.youcode.youquiz.entities.Level;
 import org.youcode.youquiz.entities.Question;
 import org.youcode.youquiz.entities.Subject;
+import org.youcode.youquiz.entities.enums.QuestionType;
 import org.youcode.youquiz.mappers.QuestionMapper;
 import org.youcode.youquiz.repositories.LevelRepository;
 import org.youcode.youquiz.repositories.QuestionRepository;
@@ -41,6 +42,10 @@ public class QuestionServiceImpl extends GenericServiceImpl<Question, Long, Ques
 
         if (!existingSubject.getSubSubjects().isEmpty()) {
             throw new EntityCreationException("Cannot create question in a parent subject, try to create question in subSubject");
+        }
+
+        if (requestDto.questionType() == QuestionType.SINGLE_CHOICE && requestDto.numberOfCorrectAnswers() > 1) {
+            throw new EntityCreationException("Cannot create more than one correct answer in the single choice question");
         }
 
         Level existingLevel = levelRepository.findById(requestDto.levelId())
