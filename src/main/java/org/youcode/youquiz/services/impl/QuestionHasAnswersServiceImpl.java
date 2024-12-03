@@ -91,7 +91,7 @@ public class QuestionHasAnswersServiceImpl extends GenericServiceImpl<QuestionHa
         double minNote = question.getLevel().getMinPoints();
         double maxNote = question.getLevel().getMaxPoints();
 
-        if (note < minNote || note > maxNote) {
+        if (note > maxNote) {
             throw new IllegalArgumentException(
                     "The note must be between " + minNote + " and " + maxNote + " for the question level: " + question.getLevel().getDescription()
             );

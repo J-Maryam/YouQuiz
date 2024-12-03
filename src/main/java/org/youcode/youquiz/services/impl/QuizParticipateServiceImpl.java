@@ -4,12 +4,9 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.validation.annotation.Validated;
-import org.youcode.youquiz.dtos.answerValidation.EmbeddableAnswerValidationDTO;
 import org.youcode.youquiz.dtos.participation.ParticipateRequestDTO;
 import org.youcode.youquiz.dtos.participation.ParticipationResultDTO;
-import org.youcode.youquiz.dtos.question.EmbeddableQuestionDTO;
-import org.youcode.youquiz.dtos.student.EmbeddableStudentDTO;
-import org.youcode.youquiz.dtos.trainer.EmbeddableTrainerDTO;
+import org.youcode.youquiz.dtos.participation.QuizResultDTO;
 import org.youcode.youquiz.entities.AnswerValidation;
 import org.youcode.youquiz.entities.QuestionHasAnswers;
 import org.youcode.youquiz.entities.Quiz;
@@ -89,6 +86,31 @@ public class QuizParticipateServiceImpl implements QuizParticipateService {
         );
     }
 
+    @Override
+    public QuizResultDTO getQuizResultsByQuiz(Long quizId) {
+        List<QuizAssignment> assignments = quizAssignmentRepository.findByQuizId(quizId);
+
+        if (assignments.isEmpty()) {
+            throw new IllegalArgumentException("No results found for the given quiz ID: " + quizId);
+        }
+
+        String title = assignments.get(0).getQuiz().getTitle();
+        double successScore = assignments.get(0).getQuiz().getSuccessScore();
+
+        List<QuizResultDTO.StudentResultDTO> studentResults = assignments.stream()
+                .map(assignment -> new QuizResultDTO.StudentResultDTO(
+                        assignment.getStudent().getId(),
+                        assignment.getStudent().getFirstName(),
+                        assignment.getStudent().getLastName(),
+                        assignment.getScore(),
+                        assignment.getResult(),
+                        assignment.getAttempt()
+                ))
+                .toList();
+
+        return new QuizResultDTO(title, successScore, studentResults);
+    }
+
     private QuizAssignment validateQuizAssignment(ParticipateRequestDTO dto) {
         QuizAssignment quizAssignment = quizAssignmentRepository.findById(new QuizAssignmentId(dto.quizId(), dto.studentId()))
                 .orElseThrow(() -> new IllegalArgumentException("Quiz assignment not found"));
@@ -104,30 +126,40 @@ public class QuizParticipateServiceImpl implements QuizParticipateService {
 
     private double insertStudentAnswers(ParticipateRequestDTO dto) {
         return dto.answers().stream()
-                .flatMap(answer -> answer.selectedAnswerIds().stream()
-                        .map(answerId -> {
-                            QuestionHasAnswers questionHasAnswers = questionHasAnswersRepository
-                                    .findById(new QuestionHasAnswersId(answer.questionId(), answerId))
-                                    .orElseThrow(() -> new IllegalArgumentException("Invalid question or answer"));
+                .mapToDouble(answer -> {
+                    List<QuestionHasAnswers> questionAnswers = answer.selectedAnswerIds().stream()
+                            .map(answerId -> questionHasAnswersRepository.findById(new QuestionHasAnswersId(answer.questionId(), answerId))
+                                    .orElseThrow(() -> new IllegalArgumentException("Invalid question or answer")))
+                            .toList();
 
-                            QuizAssignment quizAssignment = quizAssignmentRepository.findById(new QuizAssignmentId(dto.quizId(), dto.studentId()))
-                                    .orElseThrow(() -> new IllegalArgumentException("Quiz assignment not found"));
+                    QuizAssignment quizAssignment = quizAssignmentRepository.findById(new QuizAssignmentId(dto.quizId(), dto.studentId()))
+                            .orElseThrow(() -> new IllegalArgumentException("Quiz assignment not found"));
 
-                            boolean isCorrect = questionHasAnswers.isCorrect();
-                            double points = isCorrect ? questionHasAnswers.getNote() : 0;
+                    boolean allCorrect = questionAnswers.stream().allMatch(QuestionHasAnswers::isCorrect);
 
-                            AnswerValidation answerValidation = new AnswerValidation();
-                            answerValidation.setQuestion(questionHasAnswers.getQuestion());
-                            answerValidation.setAnswer(questionHasAnswers.getAnswer());
-                            answerValidation.setQuiz(quizAssignment.getQuiz());
-                            answerValidation.setStudent(quizAssignment.getStudent());
-                            answerValidation.setPoints(points);
+                    double questionPoints = 0;
+                    if (allCorrect) {
+                        questionPoints = questionAnswers.stream()
+                                .mapToDouble(QuestionHasAnswers::getNote)
+                                .sum();
+                    }
 
-                            answerValidationRepository.save(answerValidation);
+                    questionAnswers.forEach(questionHasAnswer -> {
+                        boolean isCorrect = questionHasAnswer.isCorrect();
+                        double points = allCorrect ? questionHasAnswer.getNote() : 0;
 
-                            return points;
-                        }))
-                .mapToDouble(Double::doubleValue)
+                        AnswerValidation answerValidation = new AnswerValidation();
+                        answerValidation.setQuestion(questionHasAnswer.getQuestion());
+                        answerValidation.setAnswer(questionHasAnswer.getAnswer());
+                        answerValidation.setQuiz(quizAssignment.getQuiz());
+                        answerValidation.setStudent(quizAssignment.getStudent());
+                        answerValidation.setPoints(points);
+
+                        answerValidationRepository.save(answerValidation);
+                    });
+
+                    return questionPoints;
+                })
                 .sum();
     }
 

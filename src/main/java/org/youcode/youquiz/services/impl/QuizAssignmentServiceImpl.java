@@ -3,6 +3,7 @@ package org.youcode.youquiz.services.impl;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.validation.annotation.Validated;
+import org.youcode.youquiz.common.exceptions.EntityNotFoundException;
 import org.youcode.youquiz.common.services.GenericServiceImpl;
 import org.youcode.youquiz.dtos.quizAssignment.QuizAssignmentRequestDTO;
 import org.youcode.youquiz.dtos.quizAssignment.QuizAssignmentResponseDTO;
@@ -33,10 +34,10 @@ public class QuizAssignmentServiceImpl extends GenericServiceImpl<QuizAssignment
     @Override
     public QuizAssignmentResponseDTO create(QuizAssignmentRequestDTO requestDTO) {
         Student existingStudent = studentRepository.findById(requestDTO.studentId())
-                .orElseThrow(() -> new RuntimeException("Student with Id " + requestDTO.studentId() + " not found"));
+                .orElseThrow(() -> new EntityNotFoundException("Student with Id " + requestDTO.studentId() + " not found"));
 
         Quiz existingQuiz = quizRepository.findById(requestDTO.quizId())
-                .orElseThrow(() -> new RuntimeException("Quiz with Id " + requestDTO.quizId() + " not found"));
+                .orElseThrow(() -> new EntityNotFoundException("Quiz with Id " + requestDTO.quizId() + " not found"));
 
         QuizAssignmentId quizAssignmentId = new QuizAssignmentId(existingStudent.getId(), existingQuiz.getId());
         QuizAssignment quizAssignment = mapper.toEntity(requestDTO);
