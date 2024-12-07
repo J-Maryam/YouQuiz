@@ -3,7 +3,7 @@
 ![Java](https://img.shields.io/badge/Java-ED8B00?style=for-the-badge&logo=java&logoColor=white) ![Spring Boot](https://img.shields.io/badge/Spring_Boot-6DB33F?style=for-the-badge&logo=spring&logoColor=white) ![PostgreSQL](https://img.shields.io/badge/PostgreSQL-316192?style=for-the-badge&logo=postgresql&logoColor=white) ![Lombok](https://img.shields.io/badge/Lombok-CA4245?style=for-the-badge&logo=lombok&logoColor=white) ![JUnit](https://img.shields.io/badge/JUnit-25A162?style=for-the-badge&logo=junit5&logoColor=white) ![Mockito](https://img.shields.io/badge/Mockito-7CFC00?style=for-the-badge&logo=mockito&logoColor=white)
 
 
-Welcome to **YouQuiz**, your ultimate solution for automating quiz and exam workflows. Designed to cater to the needs of educators and institutions, YouQuiz offers a seamless and efficient way to manage assessments. This project was built with ❤️ and cutting-edge technologies!
+Welcome to **YouQuiz**, your ultimate solution for automating quiz and exam workflows. Designed to cater to the needs of educators and institutions, YouQuiz offers a seamless and efficient way to manage assessments.
 
 ---
 
@@ -82,7 +82,7 @@ src
 ### Steps
 1. Clone the repository:
    ```bash
-   git clone https://github.com/your-repo/youquiz.git
+   git clone https://github.com/J-Maryam/YouQuiz.git
    cd youquiz
    ```
 2. Configure the database in `application.properties`:
