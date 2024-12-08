@@ -65,7 +65,6 @@ src
 │   │   └── utils           # Utility and helper classes
 │   └── resources
 │       ├── application.properties # Database and app configuration
-│       └── schema.sql              # Database schema (if applicable)
 └── test
     └── java/org/youcode/youquiz    # Unit and integration tests
 ```
@@ -101,7 +100,7 @@ src
 
 ## 📈 Class diagram (UML)
 
-![img.png](img.png)
+![img_2.png](img_2.png)
 ---
 
 ## 🏆 Evaluation Criteria
