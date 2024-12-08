@@ -16,7 +16,6 @@ Welcome to **YouQuiz**, your ultimate solution for automating quiz and exam work
 5. [Setup and Installation](#-setup-and-installation)
 7. [Evaluation Criteria](#-evaluation-criteria)
 8. [Endpoints](#-endpoints)
-9. [Contributing](#-contributing)
 
 ---
 
