@@ -20,6 +20,7 @@ import org.youcode.youquiz.services.QuizParticipateService;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 @Service
@@ -46,7 +47,31 @@ public class QuizParticipateServiceImpl implements QuizParticipateService {
     @Override
     public ParticipationResultDTO getQuizResult(Long assignmentId, Long studentId) {
         QuizAssignment assignment = quizAssignmentRepository.findByQuizIdAndStudentId(assignmentId, studentId)
-                .orElseThrow(() -> new EntityNotFoundException("Aucune affectation trouvée pour cet étudiant et ce quiz."));
+                .orElseThrow(() -> new EntityNotFoundException("Aucune participation trouvée pour cet étudiant et ce quiz."));
+
+        Map<Question, List<AnswerValidation>> groupedValidations = assignment.getAnswerValidations().stream()
+                .collect(Collectors.groupingBy(AnswerValidation::getQuestion));
+
+        List<ParticipationResultDTO.QuestionDTO> questions = groupedValidations.entrySet().stream()
+                .map(entry -> {
+                    Question question = entry.getKey();
+                    List<AnswerValidation> validations = entry.getValue();
+
+                    List<ParticipationResultDTO.AnswerDTO> answerDTOs = validations.stream()
+                            .map(validation -> new ParticipationResultDTO.AnswerDTO(validation.getAnswer().getText()))
+                            .toList();
+
+                    double totalPoints = validations.stream()
+                            .mapToDouble(AnswerValidation::getPoints)
+                            .sum();
+
+                    return new ParticipationResultDTO.QuestionDTO(
+                            question.getText(),
+                            totalPoints,
+                            answerDTOs
+                    );
+                })
+                .toList();
 
         return new ParticipationResultDTO(
                 assignment.getQuiz().getTitle(),
@@ -56,12 +81,7 @@ public class QuizParticipateServiceImpl implements QuizParticipateService {
                 assignment.getScore(),
                 assignment.getResult(),
                 assignment.getAttempt(),
-                assignment.getAnswerValidations().stream()
-                        .map(av -> new ParticipationResultDTO.ValidationAnswerDTO(
-                                av.getQuestion().getText(),
-                                av.getAnswer().getText(),
-                                av.getPoints()
-                        )).collect(Collectors.toList())
+                questions
         );
     }
 
@@ -73,8 +93,8 @@ public class QuizParticipateServiceImpl implements QuizParticipateService {
             throw new IllegalArgumentException("No results found for the given quiz ID: " + quizId);
         }
 
-        String title = assignments.get(0).getQuiz().getTitle();
-        double successScore = assignments.get(0).getQuiz().getSuccessScore();
+        String title = assignments.getFirst().getQuiz().getTitle();
+        double successScore = assignments.getFirst().getQuiz().getSuccessScore();
 
         List<QuizResultDTO.StudentResultDTO> studentResults = assignments.stream()
                 .map(assignment -> new QuizResultDTO.StudentResultDTO(

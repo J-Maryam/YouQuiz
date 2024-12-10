@@ -11,11 +11,15 @@ public record ParticipationResultDTO(
         double score,
         String result,
         int attempt,
-        List<ValidationAnswerDTO> answers
+        List<QuestionDTO> questions
 ) {
-    public record ValidationAnswerDTO(
+    public record QuestionDTO(
             String question,
-            String givenAnswer,
-            double points
+            double totalPoints,
+            List<AnswerDTO> answers
+    ) {}
+
+    public record AnswerDTO(
+            String givenAnswer
     ) {}
 }
