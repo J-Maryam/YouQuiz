@@ -24,7 +24,7 @@ public class ParticipateController {
         return ResponseEntity.ok(ApiResponse.success(null, "Participation created successfully"));
     }
 
-    @GetMapping("/result/{quizId}/{studentId}")
+    @GetMapping("/result/quiz/{quizId}/student/{studentId}")
     public ResponseEntity<ParticipationResultDTO> getResult(@PathVariable("quizId") Long quizId, @PathVariable("studentId") Long studentId) {
         ParticipationResultDTO result = service.getQuizResult(quizId, studentId);
         return ResponseEntity.ok(result);
