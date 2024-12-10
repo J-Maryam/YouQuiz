@@ -1,13 +1,14 @@
 package org.youcode.youquiz.dtos.participation;
 
-import java.time.LocalDateTime;
+import jakarta.validation.constraints.NotNull;
+
 import java.util.List;
 
 public record ParticipateRequestDTO(
+        @NotNull
         Long quizId,
+        @NotNull
         Long studentId,
-        LocalDateTime startTime,
-        LocalDateTime endTime,
         List<StudentAnswerDTO> answers
 ) {
 }
