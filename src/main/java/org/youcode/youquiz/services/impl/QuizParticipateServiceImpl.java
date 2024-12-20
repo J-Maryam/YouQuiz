@@ -98,7 +98,7 @@ public class QuizParticipateServiceImpl implements QuizParticipateService {
 
         List<QuizResultDTO.StudentResultDTO> studentResults = assignments.stream()
                 .map(assignment -> new QuizResultDTO.StudentResultDTO(
-                        assignment.getStudent().getId(),
+//                        assignment.getStudent().getId(),
                         assignment.getStudent().getFirstName(),
                         assignment.getStudent().getLastName(),
                         assignment.getScore(),

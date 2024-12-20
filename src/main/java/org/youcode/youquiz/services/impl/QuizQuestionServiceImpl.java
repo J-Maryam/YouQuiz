@@ -20,7 +20,7 @@ import org.youcode.youquiz.services.QuizQuestionService;
 @Service
 @Transactional
 @Validated
-public class QuizQuestionServiceImpl extends GenericServiceImpl<QuizQuestion, Long, QuizQuestionRequestDTO, QuizQuestionResponseDTO> implements QuizQuestionService {
+public class QuizQuestionServiceImpl extends GenericServiceImpl<QuizQuestion, QuizQuestionId, QuizQuestionRequestDTO, QuizQuestionResponseDTO> implements QuizQuestionService {
     private final QuizRepository quizRepository;
     private final QuestionRepository questionRepository;
     public QuizQuestionServiceImpl(QuizQuestionRepository repository, QuizQuestionMapper mapper, QuizRepository quizRepository, QuestionRepository questionRepository) {
