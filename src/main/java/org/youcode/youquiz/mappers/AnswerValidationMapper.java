@@ -13,7 +13,7 @@ public interface AnswerValidationMapper extends GenericMapper<AnswerValidation, 
 
     @Mapping(source = "quiz", target = "quiz")
     @Mapping(source = "student", target = "student")
-    @Mapping(source = "answer", target = "answer")
+//    @Mapping(source = "answer", target = "answer")
     @Mapping(source = "question", target = "question")
     EmbeddableAnswerValidationDTO toEmbeddableAnswerValidationDTO(AnswerValidation answerValidation);
 

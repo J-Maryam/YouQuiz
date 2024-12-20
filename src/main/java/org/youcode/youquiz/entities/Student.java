@@ -10,6 +10,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -24,5 +25,5 @@ public class Student extends User {
     private LocalDate registrationDate;
 
     @OneToMany(mappedBy = "student")
-    private List<QuizAssignment> quizAssignments;
+    private List<QuizAssignment> quizAssignments = new ArrayList<>();
 }

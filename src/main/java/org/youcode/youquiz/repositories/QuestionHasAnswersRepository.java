@@ -7,9 +7,13 @@ import org.springframework.stereotype.Repository;
 import org.youcode.youquiz.entities.QuestionHasAnswers;
 import org.youcode.youquiz.entities.embbedableId.QuestionHasAnswersId;
 
+import java.util.List;
+
 @Repository
 public interface QuestionHasAnswersRepository extends JpaRepository<QuestionHasAnswers, QuestionHasAnswersId> {
     Long countByQuestionId(Long questionId);
     Long countByQuestionIdAndCorrect(Long questionId, boolean isTrue);
-    @Query("SELECT SUM(qha.note) FROM QuestionHasAnswers qha WHERE qha.question.id = :questionId")
-    double sumNoteByQuestionId(@Param("questionId") Long questionId);}
+    @Query("SELECT COALESCE(SUM(qha.note), 0) FROM QuestionHasAnswers qha WHERE qha.question.id = :questionId")
+    Double sumNoteByQuestionId(@Param("questionId") Long questionId);
+    List<QuestionHasAnswers> findAllByQuestionId(Long questionId);
+}

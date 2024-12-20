@@ -9,5 +9,4 @@ import java.util.List;
 
 @Repository
 public interface AnswerValidationRepository extends JpaRepository<AnswerValidation, AnswerValidationId> {
-    List<AnswerValidation> findByQuizIdAndStudentId(long quizId, long studentId);
 }
