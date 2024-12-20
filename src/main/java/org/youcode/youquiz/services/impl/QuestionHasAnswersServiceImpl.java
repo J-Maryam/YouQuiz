@@ -1,6 +1,5 @@
 package org.youcode.youquiz.services.impl;
 
-import jakarta.persistence.EntityExistsException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.validation.annotation.Validated;
@@ -12,7 +11,6 @@ import org.youcode.youquiz.entities.Answer;
 import org.youcode.youquiz.entities.Question;
 import org.youcode.youquiz.entities.QuestionHasAnswers;
 import org.youcode.youquiz.entities.embbedableId.QuestionHasAnswersId;
-import org.youcode.youquiz.entities.enums.LevelType;
 import org.youcode.youquiz.entities.enums.QuestionType;
 import org.youcode.youquiz.mappers.QuestionHasAnswersMapper;
 import org.youcode.youquiz.repositories.AnswerRepository;
@@ -20,7 +18,7 @@ import org.youcode.youquiz.repositories.QuestionHasAnswersRepository;
 import org.youcode.youquiz.repositories.QuestionRepository;
 import org.youcode.youquiz.services.QuestionHasAnswersService;
 
-import static org.youcode.youquiz.entities.enums.LevelType.*;
+import java.util.List;
 
 @Service
 @Transactional
@@ -57,7 +55,18 @@ public class QuestionHasAnswersServiceImpl extends GenericServiceImpl<QuestionHa
         return mapper.toDto(saved);
     }
 
-    //    TODO: implements the other methods
+    @Override
+    public List<QuestionHasAnswersResponseDTO> getByQuestionId(Long questionId) {
+        if (!questionRepository.existsById(questionId)) {
+            throw new EntityNotFoundException("Question with Id " + questionId + " does not exist");
+        }
+
+        List<QuestionHasAnswers> questionHasAnswers = hasAnswersRepository.findAllByQuestionId(questionId);
+
+        return questionHasAnswers.stream()
+                .map(mapper::toDto)
+                .toList();
+    }
 
     private void validateQuestionAnswers(Question question, boolean correct, double note) {
         long currentAnswerCount = hasAnswersRepository.countByQuestionId(question.getId());
@@ -93,11 +102,13 @@ public class QuestionHasAnswersServiceImpl extends GenericServiceImpl<QuestionHa
 
         if (note > maxNote) {
             throw new IllegalArgumentException(
-                    "The note must be between " + minNote + " and " + maxNote + " for the question level: " + question.getLevel().getDescription()
+//                    "The note must be between " + minNote + " and " + maxNote + " for the question level: " + question.getLevel().getDescription()
+                    "The entered point exceeds the maximum allowed points (" + maxNote + "). Please provide a point within the valid range."
             );
         }
 
-        double totalNotes = hasAnswersRepository.sumNoteByQuestionId(question.getId());
+
+        Double totalNotes = hasAnswersRepository.sumNoteByQuestionId(question.getId());
         if (totalNotes + note > maxNote) {
             throw new IllegalArgumentException("The total note for all answers of the question cannot exceed " + maxNote + ".");
         }
