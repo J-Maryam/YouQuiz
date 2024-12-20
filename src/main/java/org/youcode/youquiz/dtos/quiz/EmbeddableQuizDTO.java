@@ -8,7 +8,7 @@ public record EmbeddableQuizDTO(
         double successScore,
         boolean canSeeAnswers,
         boolean canSeeResult,
-        String remark,
-        EmbeddableTrainerDTO trainer
+        String remark
+//        EmbeddableTrainerDTO trainer
 ) {
 }

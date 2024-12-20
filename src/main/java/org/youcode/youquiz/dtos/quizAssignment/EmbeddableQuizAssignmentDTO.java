@@ -12,7 +12,7 @@ public record EmbeddableQuizAssignmentDTO(
         int attempt,
         double score,
         String result,
-        EmbeddableQuizDTO quiz,
-        EmbeddableStudentDTO student
+        EmbeddableQuizDTO quiz
+//        EmbeddableStudentDTO student
 ) {
 }

@@ -10,7 +10,7 @@ public record EmbeddableQuestionDTO(
         int numberOfCorrectAnswers,
         String text,
         QuestionType questionType,
-        EmbeddableSubjectDTO subject,
-        EmbeddableLevelDTO level
+        EmbeddableSubjectDTO subject
+//        EmbeddableLevelDTO level
 ) {
 }

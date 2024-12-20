@@ -8,7 +8,7 @@ public record QuizResultDTO(
         List<StudentResultDTO> students
 ) {
     public record StudentResultDTO(
-            Long studentId,
+//            Long studentId,
             String firstName,
             String lastName,
             double score,
