@@ -11,7 +11,7 @@ import java.util.List;
 
 public record EmbeddableQuizQuestionDTO(
         int timer,
-        EmbeddableQuizDTO quiz,
-        EmbeddableQuestionDTO question
+        EmbeddableQuizDTO quiz
+//        EmbeddableQuestionDTO question
 ) {
 }
