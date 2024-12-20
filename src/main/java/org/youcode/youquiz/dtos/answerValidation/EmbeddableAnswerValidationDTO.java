@@ -8,7 +8,7 @@ import org.youcode.youquiz.dtos.student.EmbeddableStudentDTO;
 public record EmbeddableAnswerValidationDTO(
         double points,
         EmbeddableQuestionDTO question,
-        EmbeddableAnswerDTO answer,
+//        EmbeddableAnswerDTO answer,
         EmbeddableQuizDTO quiz,
         EmbeddableStudentDTO student
 ) {
