@@ -16,6 +16,8 @@ import org.youcode.youquiz.repositories.QuizSubjectRepository;
 import org.youcode.youquiz.repositories.SubjectRepository;
 import org.youcode.youquiz.services.QuizSubjectService;
 
+import java.util.List;
+
 @Service
 @Transactional
 @Validated
@@ -23,11 +25,13 @@ public class QuizSubjectServiceImpl extends GenericServiceImpl<QuizSubject, Quiz
 
     private final QuizRepository quizRepository;
     private final SubjectRepository subjectRepository;
+    private final QuizSubjectRepository quizSubjectRepository;
 
-    public QuizSubjectServiceImpl(QuizSubjectRepository repository, QuizSubjectMapper mapper, QuizRepository quizRepository, SubjectRepository subjectRepository) {
+    public QuizSubjectServiceImpl(QuizSubjectRepository repository, QuizSubjectMapper mapper, QuizRepository quizRepository, SubjectRepository subjectRepository, QuizSubjectRepository quizSubjectRepository) {
         super(repository, mapper);
         this.quizRepository = quizRepository;
         this.subjectRepository = subjectRepository;
+        this.quizSubjectRepository = quizSubjectRepository;
     }
 
     @Override
@@ -44,5 +48,17 @@ public class QuizSubjectServiceImpl extends GenericServiceImpl<QuizSubject, Quiz
 
         QuizSubject saved = repository.save(quizSubject);
         return mapper.toDto(saved);
+    }
+
+    @Override
+    public List<QuizSubjectResponseDTO> getByQuiz(Long quizId) {
+        Quiz quiz = quizRepository.findById(quizId)
+                .orElseThrow(() -> new RuntimeException("Quiz with Id " + quizId + " not found"));
+
+        List<QuizSubject> quizSubjects = quizSubjectRepository.findAllByQuizId(quizId);
+
+        return quizSubjects.stream()
+                .map(mapper::toDto)
+                .toList();
     }
 }
