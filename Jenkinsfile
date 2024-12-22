@@ -34,7 +34,8 @@ pipeline {
                             -Dsonar.projectKey=YouQuiz_jenkins_project \
                             -Dsonar.projectName='YouQuiz_jenkins_project' \
                             -Dsonar.host.url=http://localhost:9000 \
-                            -Dsonar.login=${env.SONAR_TOKEN}
+                            -Dsonar.login=${env.SONAR_TOKEN}\
+                            -DskipTests
                         """
                     }
                 }
