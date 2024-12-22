@@ -1,6 +1,8 @@
 pipeline {
     agent any
-
+    tools {
+        maven 'Maven 3.6.3'
+    }
     stages {
         stage('Checkout') {
             steps {
@@ -8,13 +10,15 @@ pipeline {
             }
         }
 
-        stage('Build') {
-            steps {
-                script {
-                    echo 'Building the project with Maven...'
-                    sh 'mvn clean package'
+        stages {
+                stage('Build') {
+                    steps {
+                        script {
+                            echo "Building the project with Maven..."
+                            sh 'mvn clean package'
+                        }
+                    }
                 }
-            }
         }
 
         stage('Test') {
