@@ -19,19 +19,10 @@ pipeline {
             steps {
                 script {
                     echo "Building the project with Maven using JDK 21..."
-                    sh 'mvn clean package -DskipTests'  // Ajout de -DskipTests
+                    sh 'mvn clean package -DskipTests'
                 }
             }
         }
-
-        /* stage('Test') {
-            steps {
-                script {
-                    echo 'Running unit tests...'
-                    sh 'mvn test'  // Lance les tests unitaires
-                }
-            }
-        } */
 
         stage('SonarQube Analysis') {
             steps {
