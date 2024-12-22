@@ -4,6 +4,10 @@ pipeline {
         maven 'Maven'
         jdk 'JDK 21'
     }
+    environment {
+        SONAR_TOKEN = credentials('sonartoken')
+    }
+
     stages {
         stage('Checkout') {
             steps {
@@ -34,7 +38,13 @@ pipeline {
                 script {
                     echo 'Running SonarQube analysis...'
                     withSonarQubeEnv('sonarqube-8.9') {
-                        sh 'mvn sonar:sonar -DskipTests'
+                        sh """
+                          mvn clean verify sonar:sonar \
+                            -Dsonar.projectKey=YouQuiz_jenkins_project \
+                            -Dsonar.projectName='YouQuiz_jenkins_project' \
+                            -Dsonar.host.url=http://localhost:9000 \
+                            -Dsonar.login=${env.SONAR_TOKEN}
+                        """
                     }
                 }
             }
