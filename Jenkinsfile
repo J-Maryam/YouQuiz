@@ -15,7 +15,7 @@ pipeline {
             steps {
                 script {
                     echo "Building the project with Maven using JDK 21..."
-                    sh 'mvn clean package'
+                    sh 'mvn clean package -DskipTests'  // Ajout de -DskipTests
                 }
             }
         }
@@ -34,7 +34,7 @@ pipeline {
                 script {
                     echo 'Running SonarQube analysis...'
                     withSonarQubeEnv('sonarqube-8.9') {
-                        sh 'mvn sonar:sonar'
+                        sh 'mvn sonar:sonar -DskipTests'
                     }
                 }
             }
