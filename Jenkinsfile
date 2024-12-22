@@ -10,25 +10,23 @@ pipeline {
             }
         }
 
-        stages {
-                stage('Build') {
-                    steps {
-                        script {
-                            echo "Building the project with Maven..."
-                            sh 'mvn clean package'
-                        }
-                    }
-                }
-        }
-
-        stage('Test') {
+        stage('Build') {
             steps {
                 script {
-                    echo 'Running unit tests...'
-                    sh 'mvn test'
+                    echo "Building the project with Maven..."
+                    sh 'mvn clean package'
                 }
             }
         }
+
+        /* stage('Test') {
+            steps {
+                script {
+                    echo 'Running unit tests...'
+                    sh 'mvn test'  // Lance les tests unitaires
+                }
+            }
+        } */
 
         stage('SonarQube Analysis') {
             steps {
