@@ -2,6 +2,7 @@ pipeline {
     agent any
     tools {
         maven 'Maven'
+        jdk 'JDK 21'
     }
     stages {
         stage('Checkout') {
@@ -13,7 +14,7 @@ pipeline {
         stage('Build') {
             steps {
                 script {
-                    echo "Building the project with Maven..."
+                    echo "Building the project with Maven using JDK 21..."
                     sh 'mvn clean package'
                 }
             }
