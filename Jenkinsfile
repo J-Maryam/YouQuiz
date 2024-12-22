@@ -4,7 +4,7 @@ pipeline {
     stages {
         stage('Checkout') {
             steps {
-                git credentialsId: 'youQuiz-token', url: 'https://github.com/J-Maryam/YouQuiz.git'
+                git branch: 'main', url: 'https://github.com/J-Maryam/YouQuiz.git', credentialsId: 'youQuiz-token'
             }
         }
 
