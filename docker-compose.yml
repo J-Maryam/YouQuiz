@@ -1,0 +1,58 @@
+version: '3.8'
+
+services:
+#  jenkins:
+#    image: jenkins/jenkins:lts
+#    container_name: jenkins
+#    ports:
+#      - "9090:8080"  # Port pour Jenkins
+#      - "50000:50000"     # Port pour les agents Jenkins
+#    volumes:
+#      - jenkins_home:/var/jenkins_home
+#      - /var/run/docker.sock:/var/run/docker.sock # Pour permettre à Jenkins d'utiliser Docker
+#    environment:
+#      - JAVA_OPTS=-Djenkins.install.runSetupWizard=false
+#    networks:
+#      - ci-cd
+
+  sonarqube:
+    image: sonarqube:latest
+    container_name: sonarqube
+    ports:
+      - "9000:9000" # Port pour SonarQube
+    environment:
+      - SONAR_ES_BOOTSTRAP_CHECKS_DISABLE=true
+    networks:
+      - ci-cd
+
+  postgres:
+    image: postgres:15
+    container_name: postgres
+    ports:
+      - "5432:5432" # Port pour PostgreSQL
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: "@aahmhmm28"
+      POSTGRES_DB: youQuiz_db
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    networks:
+      - ci-cd
+
+  pgadmin:
+    image: dpage/pgadmin4
+    container_name: pgadmin
+    ports:
+      - "5051:80" # Port pour PgAdmin
+    environment:
+      PGADMIN_DEFAULT_EMAIL: admin@admin.com
+      PGADMIN_DEFAULT_PASSWORD: admin123
+    networks:
+      - ci-cd
+
+volumes:
+  jenkins_home:     # Volume pour Jenkins
+  postgres_data:    # Volume pour PostgreSQL
+
+networks:
+  ci-cd:
